@@ -22,7 +22,7 @@ abstracts:
           content: "Predictive algorithms, machine learning, cardiovascular event"
 date: today
 format:
-  intec-docx: default
+  # intec-docx: default
   intec-html: default
 bibliography: bibliography.bib
 ---

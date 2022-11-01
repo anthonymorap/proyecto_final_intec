@@ -1,0 +1,63 @@
+---
+title: "Machine Learning para predecir el riesgo de evento cardiovascular"
+subtitle: ""
+author: 
+    - name: "Anthony Mora"
+      id: 1097694
+advisers: 
+    - "Renato González Disla"
+area: Área de ingenierías
+program: "Maestría en Ciencia de Datos (MCD)"
+degree: "Magíster en Ciencia de Datos"
+abstracts:
+    - title: Resumen
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper"
+      keywords:
+        - title: "Palabras clave"
+          content: "Algoritmos predictivos, aprendizaje de máquina, evento cardiovascular"
+    - title: Abstract
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper"
+      keywords:
+        - title: "Keywords"
+          content: "Predictive algorithms, machine learning, cardiovascular event"
+date: today
+format:
+  intec-docx: default
+  intec-html: default
+bibliography: bibliography.bib
+---
+
+# Introducción
+
+El siglo XXI se ha visto marcado por el acelerado desarrollo de las tecnologías de información, esto ha implicado avances en el poder de procesamiento y la capacidad de almacenamiento de nuestras computadoras. Estas nuevas herramientas en manos de la humanidad han permitido el descubrimiento de los datos como uno de los recursos más preciados y abundantes de la actualidad, ya que el día a día del hombre moderno se encuentra muy relacionado con la constante generación de datos. 
+
+Los investigadores de inteligencia artificial (IA) y el machine learning (ML) se han dado a la tarea de aprovechar los conocimientos de distintas ramas como las ciencias estadísticas, computacionales y cognitivas para resolver problemas con la ayuda de las computadoras. Esto por medio de la elaboración de algoritmos que identifican patrones en los datos para ser aplicados en tareas como predicción o clasificación, estas siendo las más populares.
+
+Según la Organización Mundial de la Salud (OMS), las enfermedades cardiovasculares son la principal causa de muertes a nivel mundial, con un estimado de 17.9 millones de personas fallecidas por eventos cardiovasculares (ECV) en el 2019, mayormente por cardiopatía coronaria y accidentes cerebrovasculares (ACV).
+
+Las rápidas transformaciones económicas (industrialización, mercantilización, urbanización, globalización e informacionalización) han contribuido a prolongar la vida de las personas, los estilos de vida poco saludables y los cambios medioambientales. Predisponiendo a aumentar los factores de riesgo cardiovascular y la pandemia de ECV. Crecientes tasas de ECV han tenido un impacto económico, que amenaza al sistema de medicina y a la sociedad [@Wu2016-zw].
+
+En décadas recientes, se han realizado grandes avances en investigación y práctica cardiovascular con el objetivo de mejorar el diagnóstico y tratamiento de enfermedades cardiacas, así como la reducción de la mortalidad por ECV [@chen].
+
+El machine learning es cada vez más utilizado dentro del campo de la medicina cardiovascular [@Krittanawong2020-te], donde vemos aplicaciones como medicina de precisión, predicciones clínicas, análisis de imágenes cardíacas y robots inteligentes [@Yan2019-he]. La promesa de la IA y el machine learning en cardiología es proveer una serie de herramientas para aumentar y extender la efectividad del cardiólogo [@JOHNSON20182668].
+
+
+# Planteamiento del problema
+
+## Objetivo general
+
+## Objetivos específicos
+
+## Justificación
+
+## Alcance 
+
+# Marco teórico/conceptual
+
+# Metodología
+
+# Resultados
+
+# Conclusiones
+
+# Bibliografía {-}

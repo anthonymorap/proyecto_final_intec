@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Anthony Mora">
+<meta name="dcterms.date" content="2022-10-31">
+
+<title>Machine Learning para predecir el riesgo de evento cardiovascular</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="Proyecto_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Proyecto_files/libs/quarto-html/quarto.js"></script>
+<script src="Proyecto_files/libs/quarto-html/popper.min.js"></script>
+<script src="Proyecto_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Proyecto_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Proyecto_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Proyecto_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Proyecto_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Proyecto_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Proyecto_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Machine Learning para predecir el riesgo de evento cardiovascular</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Anthony Mora </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 31, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción" class="level1">
+<h1>Introducción</h1>
+<p>El siglo XXI se ha visto marcado por el acelerado desarrollo de las tecnologías de información, esto ha implicado avances en el poder de procesamiento y la capacidad de almacenamiento de nuestras computadoras. Estas nuevas herramientas en manos de la humanidad han permitido el descubrimiento de los datos como uno de los recursos más preciados y abundantes de la actualidad, ya que el día a día del hombre moderno se encuentra muy relacionado con la constante generación de datos.</p>
+<p>Los investigadores de inteligencia artificial (IA) y el machine learning (ML) se han dado a la tarea de aprovechar los conocimientos de distintas ramas como las ciencias estadísticas, computacionales y cognitivas para resolver problemas con la ayuda de las computadoras. Esto por medio de la elaboración de algoritmos que identifican patrones en los datos para ser aplicados en tareas como predicción o clasificación, estas siendo las más populares.</p>
+<p>Según la Organización Mundial de la Salud (OMS), las enfermedades cardiovasculares son la principal causa de muertes a nivel mundial, con un estimado de 17.9 millones de personas fallecidas por eventos cardiovasculares (ECV) en el 2019, mayormente por cardiopatía coronaria y accidentes cerebrovasculares (ACV).</p>
+<p>Las rápidas transformaciones económicas (industrialización, mercantilización, urbanización, globalización e informacionalización) han contribuido a prolongar la vida de las personas, los estilos de vida poco saludables y los cambios medioambientales. Predisponiendo a aumentar los factores de riesgo cardiovascular y la pandemia de ECV. Crecientes tasas de ECV han tenido un impacto económico, que amenaza al sistema de medicina y a la sociedad <span class="citation" data-cites="Wu2016-zw">(<a href="#ref-Wu2016-zw" role="doc-biblioref">Wu, Benjamin, and MacMahon 2016</a>)</span>.</p>
+<p>En décadas recientes, se han realizado grandes avances en investigación y práctica cardiovascular con el objetivo de mejorar el diagnóstico y tratamiento de enfermedades cardiacas, así como la reducción de la mortalidad por ECV <span class="citation" data-cites="chen">(<a href="#ref-chen" role="doc-biblioref">Chen et al. 2020</a>)</span>.</p>
+<p>El machine learning es cada vez más utilizado dentro del campo de la medicina cardiovascular <span class="citation" data-cites="Krittanawong2020-te">(<a href="#ref-Krittanawong2020-te" role="doc-biblioref">Krittanawong et al. 2020</a>)</span>, donde vemos aplicaciones como medicina de precisión, predicciones clínicas, análisis de imágenes cardíacas y robots inteligentes <span class="citation" data-cites="Yan2019-he">(<a href="#ref-Yan2019-he" role="doc-biblioref">Yan et al. 2019</a>)</span>. La promesa de la IA y el machine learning en cardiología es proveer una serie de herramientas para aumentar y extender la efectividad del cardiólogo <span class="citation" data-cites="JOHNSON20182668">(<a href="#ref-JOHNSON20182668" role="doc-biblioref">Johnson et al. 2018</a>)</span>.</p>
+</section>
+<section id="planteamiento-del-problema" class="level1">
+<h1>Planteamiento del problema</h1>
+<section id="objetivo-general" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-general">Objetivo general</h2>
+</section>
+<section id="objetivos-específicos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-específicos">Objetivos específicos</h2>
+</section>
+<section id="justificación" class="level2">
+<h2 class="anchored" data-anchor-id="justificación">Justificación</h2>
+</section>
+<section id="alcance" class="level2">
+<h2 class="anchored" data-anchor-id="alcance">Alcance</h2>
+</section>
+</section>
+<section id="marco-teóricoconceptual" class="level1">
+<h1>Marco teórico/conceptual</h1>
+</section>
+<section id="metodología" class="level1">
+<h1>Metodología</h1>
+</section>
+<section id="resultados" class="level1">
+<h1>Resultados</h1>
+</section>
+<section id="conclusiones" class="level1">
+<h1>Conclusiones</h1>
+</section>
+<section id="bibliografía" class="level1 unnumbered">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Bibliografía</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-chen" class="csl-entry" role="doc-biblioentry">
+Chen, Chen, Chen Qin, Huaqi Qiu, Giacomo Tarroni, Jinming Duan, Wenjia Bai, and Daniel Rueckert. 2020. <span>“Deep Learning for Cardiac Image Segmentation: A Review.”</span> <em>Frontiers in Cardiovascular Medicine</em> 7. <a href="https://doi.org/10.3389/fcvm.2020.00025">https://doi.org/10.3389/fcvm.2020.00025</a>.
+</div>
+<div id="ref-JOHNSON20182668" class="csl-entry" role="doc-biblioentry">
+Johnson, Kipp W., Jessica Torres Soto, Benjamin S. Glicksberg, Khader Shameer, Riccardo Miotto, Mohsin Ali, Euan Ashley, and Joel T. Dudley. 2018. <span>“Artificial Intelligence in Cardiology.”</span> <em>Journal of the American College of Cardiology</em> 71 (23): 2668–79. https://doi.org/<a href="https://doi.org/10.1016/j.jacc.2018.03.521">https://doi.org/10.1016/j.jacc.2018.03.521</a>.
+</div>
+<div id="ref-Krittanawong2020-te" class="csl-entry" role="doc-biblioentry">
+Krittanawong, Chayakrit, Hafeez Ul Hassan Virk, Sripal Bangalore, Zhen Wang, Kipp W Johnson, Rachel Pinotti, Hongju Zhang, et al. 2020. <span>“Machine Learning Prediction in Cardiovascular Diseases: A Meta-Analysis.”</span> <em>Sci. Rep.</em> 10 (1): 16057. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7525515/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7525515/</a>.
+</div>
+<div id="ref-Wu2016-zw" class="csl-entry" role="doc-biblioentry">
+Wu, Yangfeng, Emelia J Benjamin, and Stephen MacMahon. 2016. <span>“Prevention and Control of Cardiovascular Disease in the Rapidly Changing Economy of China.”</span> <em>Circulation</em> 133 (24): 2545–60.
+</div>
+<div id="ref-Yan2019-he" class="csl-entry" role="doc-biblioentry">
+Yan, Yang, Jia-Wen Zhang, Guang-Yao Zang, and Jun Pu. 2019. <span>“The Primary Use of Artificial Intelligence in Cardiovascular Diseases: What Kind of Potential Role Does Artificial Intelligence Play in Future Medicine?”</span> <em>J. Geriatr. Cardiol.</em> 16 (8): 585–91.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

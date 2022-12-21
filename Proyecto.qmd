@@ -1,5 +1,5 @@
 ---
-title: "Machine Learning para predecir el riesgo de evento cardiovascular"
+title: "Machine Learning para predecir enfermedades del corazón"
 subtitle: ""
 author: 
     - name: "Anthony Mora"
@@ -11,19 +11,27 @@ program: "Maestría en Ciencia de Datos (MCD)"
 degree: "Magíster en Ciencia de Datos"
 abstracts:
     - title: Resumen
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper"
+      content: "Los eventos cardiovasculares (ECV) son de las principales causas de fallecimientos a lo largo del mundo. Al ser la salud una de las prioridades a garantizar para las personas, resulta de interés la elaboración de herramientas para la pronta detección de enfermedades del corazón.
+      
+      Este trabajo busca mostar el desempeño de algoritmos de machine learning ya posicionados como estándar en la industria, para resolver una tarea de clasificación y así predecir la probabilidad de un paciente padecer de una enfermedad cardiovascular.
+      
+      Los datos a utilizar provienen del Heart Disease dataset obtenido del repositorio de datos de la Universidad de California, Irvine (UCI)."
       keywords:
         - title: "Palabras clave"
           content: "Algoritmos predictivos, aprendizaje de máquina, evento cardiovascular"
     - title: Abstract
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper"
+      content: "Cardiovascular events (CVDs) are one of the leading causes of death throughout the world. Since health is one of the priorities to guarantee for people, it is of interest to develop tools for the early detection of heart disease.
+      
+      This work seeks to show the performance of machine learning algorithms already positioned as a standard in the industry, to solve a classification task and thus predict the probability of a patient suffering from cardiovascular disease.
+    
+      The data to be used come from the Heart Disease dataset obtained from the University of California, Irvine (UCI) data repository."
       keywords:
         - title: "Keywords"
           content: "Predictive algorithms, machine learning, cardiovascular event"
 date: today
 format:
-  # intec-docx: default
-  intec-html: default
+  intec-docx: default
+  # intec-html: default
 bibliography: bibliography.bib
 ---
 
@@ -46,18 +54,84 @@ El machine learning es cada vez más utilizado dentro del campo de la medicina c
 
 ## Objetivo general
 
+Desarrollar algoritmo eficiente que permita predecir si un paciente sufre de alguna enfermedad del corazón a partir de datos de registros médicos
+
 ## Objetivos específicos
 
-## Justificación
+- Realizar procesamiento de limpieza de variables explicativas para así poder seleccionar aquellas que sean mas significativas para la implementación del modelo
+- Mostrar técnicas de preprocesamiento de datos para mejorar el desempeño de los algoritmos
+- Por medio del estudio de diversos modelos de machine learning se usarán de referencia para determinar el mejor desempeño del algoritmo desarrollado (benchmark)
 
-## Alcance 
+## Antecedentes
 
-# Marco teórico/conceptual
+Para resolver la tarea de clasificación de este Heart Disease dataset se han implementado varios modelos de Machine Learning y Deep Learning, y estos reportan altas métricas de accuracy en sus predicciones.
 
-# Metodología
+Podemos encontrar aplicaciones recientes de técnicas de Machine Learning establecidas como multilayer perceptron (MLP) y K-Nearest Neighbour (KNN) implementados por @PalParijaPandaDhamaMohapatra con resultados de accuracy de 82.3% y área bajo la curva ROC de 86.4%. @Ahmad implementaron 11 modelos de clasificación, donde con métodos como Random Forest Classifier (RFC), Decision Trees (DT) y Gradient Boosted Classifier (GBC) obtienen métricas de accuracy entre el 97%-100%. El desempeño de estos modelos es mejorado por medio de un Stacking CV Classifier, donde además de implementar k-5 Cross Validation para medir el desempeño de los algoritmos, tambien combinan los resultados de varios clasificadores por medio de este Ensamble Model.
+
+@Budholiya proponen un sistema de diagnóstico que utiliza XGBoost Classifier (Extreme Gradient Boosting) optimizado con Bayesian Optimization como método de selección de hiperparámetros, además de técnicas de One Hot Encoding para facilitar el aprendizaje de las variables categóricas al modelo, obteniendo un accuracy de 91.8%.
+
+@Spencer2020-ut determinan que la variable más relevante para este ejercicio de clasificación es el dolor en el pecho del paciente, seguida por la evaluación de angina luego de ejercitarse, los niveles de colesterol y pruebas de talasemia, con esta información aplican diversos modelos apoyados en técnicas de selección de variables predictoras para alcanzar métricas de accuracy entre 81%-85%.
+
+@Gao2021-kj utilizan técnicas de Ensamble Learning como Boosting y Bagging, en combinación con métodos de extracción de predictores como Análisis de Discriminantes Lineales (LDA) y Análisis de Componentes Principales (PCA). Sus resultados indican que la aplicación de bagging con Decision Trees y PCA obtiene los mejores resultados con un accuracy de 98.6%.
+
+Al momento de las técnicas de estado del arte de la Inteligencia Artificial (AI) son las arquitecturas de Redes Neuronales propuestas por la rama del Deep Learning. @Zhang2021-pa combinan selección de variables incrustadas con un algoritmo de Linear Support Vector Classifier (SVC) y norma L1 como penalidad para elegir las variables relacionadas significativamente con la variable a predecir de enfermedad cardíaca, para alimentar estas características identificadas a una Red Neuronal Profunda que muestra resultados de accuracy de 98.6%.
+
+@Mehmood2021-ci logran predecir la presencia de una enfermedad cardiovascular con un accuracy del 97%, al implementar Redes Neuronales Convolucionales, apoyándose en selección de variables a través de un análisis de correlación y preprocesamiento de datos como normalización de variables continuas. @Das2009-wk introducen su metodología de Redes Neuronales con ensamblado, donde crean nuevos modelos al combinar las probabilidades posteriores de múltiples redes neuronales, mejorando así la eficiencia de este modelo final y obteniendo un accuracy de clasificación del 89%.
+
+@Mienye2020-nm proponen un método de dos etapas donde primero entrenan un autocodificador disperso, el cual es una red neuronal no supervisada que aprende una nueva representación de los datos de entrenamiento, luego en la segunda etapa utilizan una red neuronal con esta nueva representación de datos para predecir la condición de enfermedad cardiovascular en los pacientes analizados.
+
+## Metodología
+
+Para este trabajo se ha utilizado el Heart Disease dataset obtenido del repositorio de datos de la Unversidad de California, Irvine (UCI), el cual ha sido utilizado para la predicción de enfermedades cardíacas por medio de diversos algoritmos de clasificación.
+
+El mismo está compuesto por 303 observaciones de las cuales identificamos 6 con valores faltantes que fueron sustraídos del dataset a utilizar. El dataset original dispone de 76 variables por sujeto, de las cuales estudios pasados indican las 13 que han sido más efectivas para la detección de enfermedades cardíacas. La descripción de las variables se encuentra en la Tabla 1.
+
+El propósito de este documento es mostrar el poder predictivo del Machine Learning en tareas del sector salud, como la identificación del riesgo de padecer una enfermedad cardíaca.
+
+Como comentábamos anteriormente, los datos a utilizar corresponden al Cleveland Heart Disease dataset. Luego de realizar un análisis exploratorio de datos identificamos registros con información desconocida, los cuales fueron suprimidos. Adicional, el análisis de correlación entre las variables mostró que los niveles de colesterol y azúcar en la sangre presentan una baja correlación con nuestra variable dependiente.
+
+Como parte del preprocesamiento de los datos realizados la segmentación de nuestros datos de entrenamiento y validación, utilizando una proporción de 80/20. Las variables categóricas a utilizar fueron transformadas por medio de técnicas como one hot encoding, donde las variables categóricas se convierten en un vector que indica 1 para la categoría que corresponda; y normalización de las variables numéricas, que implica escalarlas para que mientras que las numéricas pasaron por un proceso de normalización.
+
+Entre los algoritmos implementados se encuentran Support Vector Classifier (SVC), Regresión Logística, K-Nearest Neighbors (KNN), Decision Tree Classifier (DTC), Random Forest Classifier (RFC), Gradient Boosted Classifier (GBC), además realizamos una implementación de una Artificial Neural Network (ANN) y el uso de herramientas optimizadas para trabajar con información tabular y redes neuronales como fastai.
+
+Los resultados de los métodos tradicionales de machine learning muestran valores de accuracy por encima de 90%, siendo KNN y Random Forest Classifier los de mejor desempeño. Cabe destacar que aún los modelos basados en redes neuronales mostrando un desempeño entre el 81%-88%, logran minimizar la función de costo en mejor medida.
+
+## Algoritmos implementados
+
+Como ya hemos mencionado anteriormente el problema que tenemos a resolver se encuentra en la rama de clasificación del Machine Learning, debajo explicamos los algoritmos implementados en este trabajo.
+
+### Support Vector Classifier
+
+Corresponde al algoritmo de Support Vector Machines aplicado a tareas de clasificación, el cual se ha vuelto popular por mostrar buenos resultados con bajo esfuerzo computacional, por ejemplo al comparar con métodos como las redes neuronales. 
+
+Como menciona @Bishop07, SVM aprovecha las propiedades analíticas y computacionales de los modelos lineales pero les supera al no estar limitado por el concepto de maldición de dimnensionalidad, donde tener una gran cantidad de variables explicativas termina reduciendo la efectividad de nuestro algoritmo de clasificación.
+
+Con esta técnica buscamos encontrar un hiperplano en $R^n$ que logre segmentar lo mejor posible los datos en las clases seleccionadas. Este plano presenta unos margenes
+
+Para entender este algoritmo podemos apoyarnos en @Bishop07, donde el problema de clasificación de dos clases se define a través del modelo lineal de forma
+
+$y(x) = $
 
 # Resultados
 
+| Clasificador                | Accuracy (%) | Recall (%) | Precision (%) | F1-Score (%) | ROC-AUC (%) |
+|-----------------------------|--------------|------------|---------------|--------------|-------------|
+| Support Vector Classifier   | 90.0%        | 90.0%      | 90.0%         | 90.0%        | 98.0%       |
+| Regresión Logística         | 90.0%        | 90.0%      | 90.0%         | 90.0%        | 98.0%       |
+| K-Nearest Neighbors         | 93.0%        | 93.0%      | 93.0%         | 93.0%        | 94.0%       |
+| Decision Tree Classifier    | 83.0%        | 83.0%      | 83.0%         | 83.0%        | 83.0%       |
+| Random Forest Classifier    | 92.0%        | 92.0%      | 92.0%         | 92.0%        | 96.0%       |
+| Gradient Boosted Classifier | 90.0%        | 90.0%      | 90.0%         | 90.0%        | 94.0%       |
+| ANN                         | 88.1%        | 70.8%      | 85.0%         |              | 87.3%       |
+| fastai tabular              | 81.4%        | 79.3%      | 82.1%         | 80.7%        | 88.1%       |
+| @PalParijaPandaDhamaMohapatra | 82.47%        | 79.3%      | 82.1%         | 80.7%        | 88.1%       |
+
+
+
 # Conclusiones
+
+Hemos visto como a través de modelos de machine learning y deep learning como podemos obtener predicciones superiores a la intuición, utilizando como insumo registros médicos en formato tabular. 
+
+El desempeño de estos algoritmos es mejorado al realizar técnicas de preprocesamiento como one hot encoding y normalización de las variables categóricas y numéricas respectivamente, en conjunto con selección de variables relevantes a partir de un análisis de correlación.
 
 # Bibliografía {-}

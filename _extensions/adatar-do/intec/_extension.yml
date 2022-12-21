@@ -12,6 +12,6 @@ contributes:
     docx:
       filters: [cover.lua, summary.lua, tocs.lua, header.lua, footer.lua]
       reference-doc: custom-reference-doc.docx
-      csl: apa-numeric-superscript-brackets.csl
+      csl: apa_es.csl
       toc: false
       number-sections: true

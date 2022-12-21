@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Anthony Mora">
-<meta name="dcterms.date" content="2022-10-31">
+<meta name="dcterms.date" content="2022-12-20">
 
-<title>Machine Learning para predecir el riesgo de evento cardiovascular</title>
+<title>Machine Learning para predecir enfermedades del corazón</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,6 +55,7 @@ div.csl-indent {
 <link href="Proyecto_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="Proyecto_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -71,13 +72,15 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#objetivo-general" id="toc-objetivo-general" class="nav-link" data-scroll-target="#objetivo-general"><span class="toc-section-number">2.1</span>  Objetivo general</a></li>
   <li><a href="#objetivos-específicos" id="toc-objetivos-específicos" class="nav-link" data-scroll-target="#objetivos-específicos"><span class="toc-section-number">2.2</span>  Objetivos específicos</a></li>
-  <li><a href="#justificación" id="toc-justificación" class="nav-link" data-scroll-target="#justificación"><span class="toc-section-number">2.3</span>  Justificación</a></li>
-  <li><a href="#alcance" id="toc-alcance" class="nav-link" data-scroll-target="#alcance"><span class="toc-section-number">2.4</span>  Alcance</a></li>
+  <li><a href="#antecedentes" id="toc-antecedentes" class="nav-link" data-scroll-target="#antecedentes"><span class="toc-section-number">2.3</span>  Antecedentes</a></li>
+  <li><a href="#metodología" id="toc-metodología" class="nav-link" data-scroll-target="#metodología"><span class="toc-section-number">2.4</span>  Metodología</a></li>
+  <li><a href="#algoritmos-implementados" id="toc-algoritmos-implementados" class="nav-link" data-scroll-target="#algoritmos-implementados"><span class="toc-section-number">2.5</span>  Algoritmos implementados</a>
+  <ul class="collapse">
+  <li><a href="#support-vector-classifier" id="toc-support-vector-classifier" class="nav-link" data-scroll-target="#support-vector-classifier"><span class="toc-section-number">2.5.1</span>  Support Vector Classifier</a></li>
   </ul></li>
-  <li><a href="#marco-teóricoconceptual" id="toc-marco-teóricoconceptual" class="nav-link" data-scroll-target="#marco-teóricoconceptual"><span class="toc-section-number">3</span>  Marco teórico/conceptual</a></li>
-  <li><a href="#metodología" id="toc-metodología" class="nav-link" data-scroll-target="#metodología"><span class="toc-section-number">4</span>  Metodología</a></li>
-  <li><a href="#resultados" id="toc-resultados" class="nav-link" data-scroll-target="#resultados"><span class="toc-section-number">5</span>  Resultados</a></li>
-  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones"><span class="toc-section-number">6</span>  Conclusiones</a></li>
+  </ul></li>
+  <li><a href="#resultados" id="toc-resultados" class="nav-link" data-scroll-target="#resultados"><span class="toc-section-number">3</span>  Resultados</a></li>
+  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones"><span class="toc-section-number">4</span>  Conclusiones</a></li>
   <li><a href="#bibliografía" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliografía">Bibliografía</a></li>
   </ul>
 </nav>
@@ -86,7 +89,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Machine Learning para predecir el riesgo de evento cardiovascular</h1>
+<h1 class="title">Machine Learning para predecir enfermedades del corazón</h1>
 </div>
 
 
@@ -103,7 +106,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 31, 2022</p>
+      <p class="date">December 20, 2022</p>
     </div>
   </div>
   
@@ -126,28 +129,151 @@ div.csl-indent {
 <h1 data-number="2"><span class="header-section-number">2</span> Planteamiento del problema</h1>
 <section id="objetivo-general" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="objetivo-general"><span class="header-section-number">2.1</span> Objetivo general</h2>
+<p>Desarrollar algoritmo eficiente que permita predecir si un paciente sufre de alguna enfermedad del corazón a partir de datos de registros médicos</p>
 </section>
 <section id="objetivos-específicos" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="objetivos-específicos"><span class="header-section-number">2.2</span> Objetivos específicos</h2>
+<ul>
+<li>Realizar procesamiento de limpieza de variables explicativas para así poder seleccionar aquellas que sean mas significativas para la implementación del modelo</li>
+<li>Mostrar técnicas de preprocesamiento de datos para mejorar el desempeño de los algoritmos</li>
+<li>Por medio del estudio de diversos modelos de machine learning se usarán de referencia para determinar el mejor desempeño del algoritmo desarrollado (benchmark)</li>
+</ul>
 </section>
-<section id="justificación" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="justificación"><span class="header-section-number">2.3</span> Justificación</h2>
+<section id="antecedentes" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="antecedentes"><span class="header-section-number">2.3</span> Antecedentes</h2>
+<p>Para resolver la tarea de clasificación de este Heart Disease dataset se han implementado varios modelos de Machine Learning y Deep Learning, y estos reportan altas métricas de accuracy en sus predicciones.</p>
+<p>Podemos encontrar aplicaciones recientes de técnicas de Machine Learning establecidas como multilayer perceptron (MLP) y K-Nearest Neighbour (KNN) implementados por<span class="citation" data-cites="PalParijaPandaDhamaMohapatra"><sup>[<a href="#ref-PalParijaPandaDhamaMohapatra" role="doc-biblioref">6</a>]</sup></span> con resultados de accuracy de 82.3% y área bajo la curva ROC de 86.4%.<span class="citation" data-cites="Ahmad"><sup>[<a href="#ref-Ahmad" role="doc-biblioref">7</a>]</sup></span> implementaron 11 modelos de clasificación, donde con métodos como Random Forest Classifier (RFC), Decision Trees (DT) y Gradient Boosted Classifier (GBC) obtienen métricas de accuracy entre el 97%-100%. El desempeño de estos modelos es mejorado por medio de un Stacking CV Classifier, donde además de implementar k-5 Cross Validation para medir el desempeño de los algoritmos, tambien combinan los resultados de varios clasificadores por medio de este Ensamble Model.</p>
+<p><span class="citation" data-cites="Budholiya"><sup>[<a href="#ref-Budholiya" role="doc-biblioref">8</a>]</sup></span> proponen un sistema de diagnóstico que utiliza XGBoost Classifier (Extreme Gradient Boosting) optimizado con Bayesian Optimization como método de selección de hiperparámetros, además de técnicas de One Hot Encoding para facilitar el aprendizaje de las variables categóricas al modelo, obteniendo un accuracy de 91.8%.</p>
+<p><span class="citation" data-cites="Spencer2020-ut"><sup>[<a href="#ref-Spencer2020-ut" role="doc-biblioref">9</a>]</sup></span> determinan que la variable más relevante para este ejercicio de clasificación es el dolor en el pecho del paciente, seguida por la evaluación de angina luego de ejercitarse, los niveles de colesterol y pruebas de talasemia, con esta información aplican diversos modelos apoyados en técnicas de selección de variables predictoras para alcanzar métricas de accuracy entre 81%-85%.</p>
+<p><span class="citation" data-cites="Gao2021-kj"><sup>[<a href="#ref-Gao2021-kj" role="doc-biblioref">10</a>]</sup></span> utilizan técnicas de Ensamble Learning como Boosting y Bagging, en combinación con métodos de extracción de predictores como Análisis de Discriminantes Lineales (LDA) y Análisis de Componentes Principales (PCA). Sus resultados indican que la aplicación de bagging con Decision Trees y PCA obtiene los mejores resultados con un accuracy de 98.6%.</p>
+<p>Al momento de las técnicas de estado del arte de la Inteligencia Artificial (AI) son las arquitecturas de Redes Neuronales propuestas por la rama del Deep Learning.<span class="citation" data-cites="Zhang2021-pa"><sup>[<a href="#ref-Zhang2021-pa" role="doc-biblioref">11</a>]</sup></span> combinan selección de variables incrustadas con un algoritmo de Linear Support Vector Classifier (SVC) y norma L1 como penalidad para elegir las variables relacionadas significativamente con la variable a predecir de enfermedad cardíaca, para alimentar estas características identificadas a una Red Neuronal Profunda que muestra resultados de accuracy de 98.6%.</p>
+<p><span class="citation" data-cites="Mehmood2021-ci"><sup>[<a href="#ref-Mehmood2021-ci" role="doc-biblioref">12</a>]</sup></span> logran predecir la presencia de una enfermedad cardiovascular con un accuracy del 97%, al implementar Redes Neuronales Convolucionales, apoyándose en selección de variables a través de un análisis de correlación y preprocesamiento de datos como normalización de variables continuas.<span class="citation" data-cites="Das2009-wk"><sup>[<a href="#ref-Das2009-wk" role="doc-biblioref">13</a>]</sup></span> introducen su metodología de Redes Neuronales con ensamblado, donde crean nuevos modelos al combinar las probabilidades posteriores de múltiples redes neuronales, mejorando así la eficiencia de este modelo final y obteniendo un accuracy de clasificación del 89%.</p>
+<p><span class="citation" data-cites="Mienye2020-nm"><sup>[<a href="#ref-Mienye2020-nm" role="doc-biblioref">14</a>]</sup></span> proponen un método de dos etapas donde primero entrenan un autocodificador disperso, el cual es una red neuronal no supervisada que aprende una nueva representación de los datos de entrenamiento, luego en la segunda etapa utilizan una red neuronal con esta nueva representación de datos para predecir la condición de enfermedad cardiovascular en los pacientes analizados.</p>
 </section>
-<section id="alcance" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="alcance"><span class="header-section-number">2.4</span> Alcance</h2>
+<section id="metodología" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="metodología"><span class="header-section-number">2.4</span> Metodología</h2>
+<p>Para este trabajo se ha utilizado el Heart Disease dataset obtenido del repositorio de datos de la Unversidad de California, Irvine (UCI), el cual ha sido utilizado para la predicción de enfermedades cardíacas por medio de diversos algoritmos de clasificación.</p>
+<p>El mismo está compuesto por 303 observaciones de las cuales identificamos 6 con valores faltantes que fueron sustraídos del dataset a utilizar. El dataset original dispone de 76 variables por sujeto, de las cuales estudios pasados indican las 13 que han sido más efectivas para la detección de enfermedades cardíacas. La descripción de las variables se encuentra en la Tabla 1.</p>
+<p>El propósito de este documento es mostrar el poder predictivo del Machine Learning en tareas del sector salud, como la identificación del riesgo de padecer una enfermedad cardíaca.</p>
+<p>Como comentábamos anteriormente, los datos a utilizar corresponden al Cleveland Heart Disease dataset. Luego de realizar un análisis exploratorio de datos identificamos registros con información desconocida, los cuales fueron suprimidos. Adicional, el análisis de correlación entre las variables mostró que los niveles de colesterol y azúcar en la sangre presentan una baja correlación con nuestra variable dependiente.</p>
+<p>Como parte del preprocesamiento de los datos realizados la segmentación de nuestros datos de entrenamiento y validación, utilizando una proporción de 80/20. Las variables categóricas a utilizar fueron transformadas por medio de técnicas como one hot encoding, donde las variables categóricas se convierten en un vector que indica 1 para la categoría que corresponda; y normalización de las variables numéricas, que implica escalarlas para que mientras que las numéricas pasaron por un proceso de normalización.</p>
+<p>Entre los algoritmos implementados se encuentran Support Vector Classifier (SVC), Regresión Logística, K-Nearest Neighbors (KNN), Decision Tree Classifier (DTC), Random Forest Classifier (RFC), Gradient Boosted Classifier (GBC), además realizamos una implementación de una Artificial Neural Network (ANN) y el uso de herramientas optimizadas para trabajar con información tabular y redes neuronales como fastai.</p>
+<p>Los resultados de los métodos tradicionales de machine learning muestran valores de accuracy por encima de 90%, siendo KNN y Random Forest Classifier los de mejor desempeño. Cabe destacar que aún los modelos basados en redes neuronales mostrando un desempeño entre el 81%-88%, logran minimizar la función de costo en mejor medida.</p>
+</section>
+<section id="algoritmos-implementados" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="algoritmos-implementados"><span class="header-section-number">2.5</span> Algoritmos implementados</h2>
+<p>Como ya hemos mencionado anteriormente el problema que tenemos a resolver se encuentra en la rama de clasificación del Machine Learning, debajo explicamos los algoritmos implementados en este trabajo.</p>
+<section id="support-vector-classifier" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="support-vector-classifier"><span class="header-section-number">2.5.1</span> Support Vector Classifier</h3>
+<p>Corresponde al algoritmo de Support Vector Machines aplicado a tareas de clasificación, el cual se ha vuelto popular por mostrar buenos resultados con bajo esfuerzo computacional, por ejemplo al comparar con métodos como las redes neuronales.</p>
+<p>Como menciona<span class="citation" data-cites="Bishop07"><sup>[<a href="#ref-Bishop07" role="doc-biblioref">15</a>]</sup></span>, SVM aprovecha las propiedades analíticas y computacionales de los modelos lineales pero les supera al no estar limitado por el concepto de maldición de dimnensionalidad, donde tener una gran cantidad de variables explicativas termina reduciendo la efectividad de nuestro algoritmo de clasificación.</p>
+<p>Con esta técnica buscamos encontrar un hiperplano en <span class="math inline">\(R^n\)</span> que logre segmentar lo mejor posible los datos en las clases seleccionadas. Este plano presenta unos margenes</p>
+<p>Para entender este algoritmo podemos apoyarnos en<span class="citation" data-cites="Bishop07"><sup>[<a href="#ref-Bishop07" role="doc-biblioref">15</a>]</sup></span>, donde el problema de clasificación de dos clases se define a través del modelo lineal de forma</p>
+<p>$y(x) = $</p>
 </section>
 </section>
-<section id="marco-teóricoconceptual" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Marco teórico/conceptual</h1>
 </section>
-<section id="metodología" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Metodología</h1>
+<section id="resultados" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Resultados</h1>
+<table class="table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Clasificador</th>
+<th>Accuracy (%)</th>
+<th>Recall (%)</th>
+<th>Precision (%)</th>
+<th>F1-Score (%)</th>
+<th>ROC-AUC (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Support Vector Classifier</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>98.0%</td>
+</tr>
+<tr class="even">
+<td>Regresión Logística</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>98.0%</td>
+</tr>
+<tr class="odd">
+<td>K-Nearest Neighbors</td>
+<td>93.0%</td>
+<td>93.0%</td>
+<td>93.0%</td>
+<td>93.0%</td>
+<td>94.0%</td>
+</tr>
+<tr class="even">
+<td>Decision Tree Classifier</td>
+<td>83.0%</td>
+<td>83.0%</td>
+<td>83.0%</td>
+<td>83.0%</td>
+<td>83.0%</td>
+</tr>
+<tr class="odd">
+<td>Random Forest Classifier</td>
+<td>92.0%</td>
+<td>92.0%</td>
+<td>92.0%</td>
+<td>92.0%</td>
+<td>96.0%</td>
+</tr>
+<tr class="even">
+<td>Gradient Boosted Classifier</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>90.0%</td>
+<td>94.0%</td>
+</tr>
+<tr class="odd">
+<td>ANN</td>
+<td>88.1%</td>
+<td>70.8%</td>
+<td>85.0%</td>
+<td></td>
+<td>87.3%</td>
+</tr>
+<tr class="even">
+<td>fastai tabular</td>
+<td>81.4%</td>
+<td>79.3%</td>
+<td>82.1%</td>
+<td>80.7%</td>
+<td>88.1%</td>
+</tr>
+<tr class="odd">
+<td><span class="citation" data-cites="PalParijaPandaDhamaMohapatra"><sup>[<a href="#ref-PalParijaPandaDhamaMohapatra" role="doc-biblioref">6</a>]</sup></span></td>
+<td>82.47%</td>
+<td>79.3%</td>
+<td>82.1%</td>
+<td>80.7%</td>
+<td>88.1%</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="resultados" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Resultados</h1>
-</section>
-<section id="conclusiones" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Conclusiones</h1>
+<section id="conclusiones" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Conclusiones</h1>
+<p>Hemos visto como a través de modelos de machine learning y deep learning como podemos obtener predicciones superiores a la intuición, utilizando como insumo registros médicos en formato tabular.</p>
+<p>El desempeño de estos algoritmos es mejorado al realizar técnicas de preprocesamiento como one hot encoding y normalización de las variables categóricas y numéricas respectivamente, en conjunto con selección de variables relevantes a partir de un análisis de correlación.</p>
 </section>
 <section id="bibliografía" class="level1 unnumbered">
 
@@ -169,6 +295,36 @@ div.csl-indent {
 </div>
 <div id="ref-JOHNSON20182668" class="csl-entry" role="doc-biblioentry">
 5. Johnson, K. W., Torres Soto, J., Glicksberg, B. S., Shameer, K., Miotto, R., Ali, M., Ashley, E., &amp; Dudley, J. T. (2018). Artificial intelligence in cardiology. <em>Journal of the American College of Cardiology</em>, <em>71</em>(23), 2668–2679. https://doi.org/<a href="https://doi.org/10.1016/j.jacc.2018.03.521">https://doi.org/10.1016/j.jacc.2018.03.521</a>
+</div>
+<div id="ref-PalParijaPandaDhamaMohapatra" class="csl-entry" role="doc-biblioentry">
+6. Pal, M., Parija, S., Panda, G., Dhama, K., &amp; Mohapatra, R. K. (2022). Risk prediction of cardiovascular disease using machine learning classifiers. <em>Open Medicine</em>, <em>17</em>(1), 1100–1113. <a href="https://doi.org/doi:10.1515/med-2022-0508">https://doi.org/doi:10.1515/med-2022-0508</a>
+</div>
+<div id="ref-Ahmad" class="csl-entry" role="doc-biblioentry">
+7. Ahmad, G., Shafiullah, Fatima, H., Abbas, M., Rahman, O., Imdadullah, &amp; Alqahtani, M. (2022). Mixed machine learning approach for efficient prediction of human heart disease by identifying the numerical and categorical features. <em>Applied Sciences</em>, <em>12</em>, 7449. <a href="https://doi.org/10.3390/app12157449">https://doi.org/10.3390/app12157449</a>
+</div>
+<div id="ref-Budholiya" class="csl-entry" role="doc-biblioentry">
+8. Budholiya, K., Shrivastava, S., &amp; Sharma, V. (2020). An optimized XGBoost based diagnostic system for effective prediction of heart disease. <em>Journal of King Saud University - Computer and Information Sciences</em>, <em>34</em>. <a href="https://doi.org/10.1016/j.jksuci.2020.10.013">https://doi.org/10.1016/j.jksuci.2020.10.013</a>
+</div>
+<div id="ref-Spencer2020-ut" class="csl-entry" role="doc-biblioentry">
+9. Spencer, R., Thabtah, F., Abdelhamid, N., &amp; Thompson, M. (2020). Exploring feature selection and classification methods for predicting heart disease. <em>Digit. Health</em>, <em>6</em>, 2055207620914777.
+</div>
+<div id="ref-Gao2021-kj" class="csl-entry" role="doc-biblioentry">
+10. Gao, X.-Y., Amin Ali, A., Shaban Hassan, H., &amp; Anwar, E. M. (2021). Improving the accuracy for analyzing heart diseases prediction based on the ensemble method. <em>Complexity</em>, <em>2021</em>, 1–10.
+</div>
+<div id="ref-Zhang2021-pa" class="csl-entry" role="doc-biblioentry">
+11. Zhang, D., Chen, Y., Chen, Y., Ye, S., Cai, W., Jiang, J., Xu, Y., Zheng, G., &amp; Chen, M. (2021). Heart disease prediction based on the embedded feature selection method and deep neural network. <em>J. Healthc. Eng.</em>, <em>2021</em>, 6260022.
+</div>
+<div id="ref-Mehmood2021-ci" class="csl-entry" role="doc-biblioentry">
+12. Mehmood, A., Iqbal, M., Mehmood, Z., Irtaza, A., Nawaz, M., Nazir, T., &amp; Masood, M. (2021). Prediction of heart disease using deep convolutional neural networks. <em>Arab. J. Sci. Eng.</em>, <em>46</em>(4), 3409–3422.
+</div>
+<div id="ref-Das2009-wk" class="csl-entry" role="doc-biblioentry">
+13. Das, R., Turkoglu, I., &amp; Sengur, A. (2009). Effective diagnosis of heart disease through neural networks ensembles. <em>Expert Syst. Appl.</em>, <em>36</em>(4), 7675–7680.
+</div>
+<div id="ref-Mienye2020-nm" class="csl-entry" role="doc-biblioentry">
+14. Mienye, I. D., Sun, Y., &amp; Wang, Z. (2020). Improved sparse autoencoder based artificial neural network approach for prediction of heart disease. <em>Inform. Med. Unlocked</em>, <em>18</em>(100307), 100307.
+</div>
+<div id="ref-Bishop07" class="csl-entry" role="doc-biblioentry">
+15. Bishop, C. M. (2007). <em>Pattern recognition and machine learning</em>. Springer.
 </div>
 </div></section></div></main>
 <!-- /main column -->
